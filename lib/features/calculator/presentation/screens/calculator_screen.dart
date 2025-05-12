@@ -14,15 +14,24 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
+  final _inputController = TextEditingController();
+
   void _toggleTheme() {
     context.read<AppThemeCubit>().toggleTheme();
+  }
+
+  @override
+  void dispose() {
+    _inputController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        forceMaterialTransparency: true,
+        centerTitle: true,
         title: BlocBuilder<AppThemeCubit, AppThemeEntity>(
           builder: (context, state) {
             return Container(
@@ -35,11 +44,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: state.isDarkMode ? null : _toggleTheme,
+                    onPressed: !state.isDarkMode ? null : _toggleTheme,
                     icon: Icon(SolarIconsBold.sun),
                   ),
                   IconButton(
-                    onPressed: !state.isDarkMode ? null : _toggleTheme,
+                    onPressed: state.isDarkMode ? null : _toggleTheme,
                     icon: Icon(SolarIconsBold.moon),
                   ),
                 ],
@@ -48,7 +57,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           },
         ),
       ),
-      body: Column(children: [CalcCalculation(), CalcKeymap()]),
+      body: Column(
+        children: [
+          CalcCalculation(inputController: _inputController),
+          CalcKeymap(inputController: _inputController),
+        ],
+      ),
     );
   }
 }

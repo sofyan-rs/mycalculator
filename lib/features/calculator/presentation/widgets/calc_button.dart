@@ -7,6 +7,7 @@ import 'package:mycalculator/core/themes/app_colors.dart';
 class CalcButton extends StatelessWidget {
   const CalcButton({
     super.key,
+    required this.inputController,
     required this.onPressed,
     this.label,
     this.icon,
@@ -14,6 +15,7 @@ class CalcButton extends StatelessWidget {
     this.color,
   });
 
+  final TextEditingController inputController;
   final String? label;
   final IconData? icon;
   final VoidCallback onPressed;

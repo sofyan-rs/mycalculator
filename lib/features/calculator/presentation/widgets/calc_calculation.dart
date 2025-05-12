@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CalcCalculation extends StatefulWidget {
-  const CalcCalculation({super.key});
+  const CalcCalculation({super.key, required this.inputController});
+
+  final TextEditingController inputController;
 
   @override
   State<CalcCalculation> createState() => _CalcCalculationState();
 }
 
 class _CalcCalculationState extends State<CalcCalculation> {
-  TextEditingController? _inputController;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,16 +32,20 @@ class _CalcCalculationState extends State<CalcCalculation> {
             textAlign: TextAlign.end,
           ),
           TextField(
-            controller: _inputController,
+            maxLength: 999,
+            controller: widget.inputController,
             onChanged: (value) {
               // Only accept numbers and operators
               if (RegExp(r'^[0-9+\-*/().]*$').hasMatch(value)) {
                 setState(() {
-                  _inputController?.text = value;
+                  widget.inputController.text = value;
                 });
               } else {
                 setState(() {
-                  _inputController?.text = value.substring(0, value.length - 1);
+                  widget.inputController.text = value.substring(
+                    0,
+                    value.length - 1,
+                  );
                 });
               }
             },
@@ -54,6 +58,7 @@ class _CalcCalculationState extends State<CalcCalculation> {
             keyboardType: TextInputType.none,
             decoration: InputDecoration(
               border: InputBorder.none,
+              counterText: '',
               hintText: '0',
               hintStyle: TextStyle(
                 fontSize: 48,
