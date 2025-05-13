@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mycalculator/core/common/bloc/app_theme_cubit/app_theme_cubit.dart';
 import 'package:mycalculator/core/common/entities/app_theme_entity.dart';
 import 'package:mycalculator/core/themes/app_themes.dart';
+import 'package:mycalculator/features/calculator/presentation/bloc/cubit/calculation_cubit.dart';
 import 'package:mycalculator/features/calculator/presentation/screens/calculator_screen.dart';
 import 'package:mycalculator/init_dependencies.dart';
 import 'package:path_provider/path_provider.dart';
@@ -28,7 +29,10 @@ class MyCalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => sl<AppThemeCubit>())],
+      providers: [
+        BlocProvider(create: (context) => sl<AppThemeCubit>()),
+        BlocProvider(create: (context) => sl<CalculationCubit>()),
+      ],
       child: BlocBuilder<AppThemeCubit, AppThemeEntity>(
         builder: (context, state) {
           return MaterialApp(
