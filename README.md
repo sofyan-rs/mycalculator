@@ -2,9 +2,9 @@
 
 An Open Source Simple Calculator Application build with Flutter.
 
-<!-- ## Screenshots -->
+## Screenshots
 
-<!-- ![Screenshot 1](screenshots/ss-1.png) -->
+![Screenshot 1](screenshots/ss-1.png)
 
 ## Development
 
