@@ -14,7 +14,7 @@ An Open Source Simple Calculator Application build with Flutter.
 flutter run
 ```
 
-#### Build This Project
+#### Build This Project for Android
 
 ```bash
 flutter build apk --split-per-abi
